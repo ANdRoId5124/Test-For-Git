@@ -1,0 +1,12 @@
+FROM maven:3.6.0-jdk-11-slim AS builder
+WORKDIR /app
+COPY src /app/src
+COPY pom.xml /app
+RUN mvn -f /app/pom.xml clean package
+
+
+FROM adoptopenjdk/openjdk11
+WORKDIR /app
+COPY --from=builder /app/target/account-service-0.0.1-SNAPSHOT.jar /usr/local/lib/account.jar
+EXPOSE 8080
+ENTRYPOINT ["java","-jar","/usr/local/lib/account.jar"]

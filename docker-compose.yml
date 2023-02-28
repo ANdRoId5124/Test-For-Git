@@ -1,0 +1,17 @@
+version: "2"
+
+services:
+  pattern-service:
+    build:
+      context: pattern-service
+    restart: on-failure
+    environment:
+      PATTERN_HELLO_TEMPLATE: configured pattern hello for %s from %s
+    ports:
+      - "8080:8080"
+  account-service:
+    build:
+      context: account-service
+    restart: on-failure
+    environment:
+      ACCOUNT_HELLO_TEMPLATE: configured authorization hello for %s from %s
