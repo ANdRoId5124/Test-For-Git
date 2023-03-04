@@ -35,7 +35,6 @@ public class LoginRequestValidationTest {
         Set<ConstraintViolation<LoginRequest>> violations = validator.validate(DTO);
         String errorMessage = violations.iterator().next().getMessage();
         assertFalse(violations.isEmpty());
-
         assertThat(errorMessage, is("Email is not valid"));
     }
 
